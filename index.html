@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- <link rel="stylesheet" href="main.js"> -->
+</head>
+
+<body>
+    <header></header>
+    <main>
+        <div class="wrap" id="mainxxxx"></div>
+    </main>
+    <footer></footer>
+    <script>
+        var keys = {
+            '0': { 0: 'q', 1: 'w', 2: 'e', 3: 'r', 4: 't', 5: 'y', 6: 'u', 7: 'i', 8: 'o', 9: 'p', length: 10 },
+            '1': ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
+            '2': ['z', 'x', 'c', 'v', 'b', 'n', 'm'],
+            'length': 3
+        };
+
+        var hash = {
+            'q': 'qq.com',
+            'w': 'weibo.com',
+            'e': 'ele.me',
+            'r': 'bilibili.com',
+            't': 'taobao.com',
+            'y': 'juejin.im',
+            'u': 'blog.csdn.net',
+            'i': 'iciba.com',
+            'o': 'bing.com',
+            'p': 'bilibili.com',
+            'a': 'aliyun.com',
+            's': 'segmentfault.com',
+            'd': 'www.sohu.com',
+            'f': 'www.qq.com',
+            'g': 'google.com',
+            'h': undefined,
+            'j': 'jianshu.com',
+            'k': undefined,
+            'l': 'baidu.com',
+            'z': 'zhihu.com',
+            'x': 'xiedaimala.com',
+            'c': undefined,
+            'v': undefined,
+            'b': 'bilibili.com',
+            'n': 'iqiyi.com',
+            'm': 'meituan.com'
+        };
+        
+        var hashInlocalStorage = JSON.parse(localStorage.getItem('zzz') || 'null')
+        if(hashInlocalStorage){
+            hash = hashInlocalStorage
+        }
+
+        index = 0
+        // 创建3个div
+        while (index < keys['length']) { // index: 0,1,2
+            div1 = document.createElement('div')
+            mainxxxx.appendChild(div1)
+            index2 = 0
+            while(index2 < keys[index]['length']){
+                kbd1 = document.createElement('kbd')
+                kbd1.textContent = keys[index][index2]
+                button1 = document.createElement('button')
+                kbd1.appendChild(button1)
+                button1.textContent = "编辑"
+                button1.id = keys[index][index2]
+                button1.onclick = function (suibianqu) {
+                    key = suibianqu['target']['id'] // q w e r t v
+                    x = prompt("给我一个网址：") 
+                    hash[key] = x // hash 变更
+                    localStorage.setItem('zzz', JSON.stringify(hash))
+                }
+                div1.appendChild(kbd1)
+                index2++ 
+            }
+            index++
+        }
+
+        document.onkeypress = function (suibianqu) {
+            key = suibianqu['key']
+            website = hash[key]
+            // location = 'http://' + website
+            window.open('http://' + website, '_blank')
+        }
+    </script>
+</body>
+
+</html>
